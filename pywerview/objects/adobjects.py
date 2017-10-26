@@ -154,7 +154,11 @@ class Trust(ADObject):
         ad_obj = ADObject(attributes)
         self.targetname = ad_obj.name
         self.objectguid = ad_obj.objectguid
-        self.trusttype= Trust.__trust_attrib.get(ad_obj.trusttype, 'unknown')
+        trusttype = list()
+        for trust_attrib, trust_type in Trust.__trust_attrib.items():
+            if ad_obj.trusttype & trust_attrib:
+                trusttype.append(trust_type)
+        self.trusttype = ', '.join(trusttype) if trusttype else 'unknown'
         self.trustdirection = Trust.__trust_direction.get(ad_obj.trustdirection, 'unknown')
 
 class GPO(ADObject):
