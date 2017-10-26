@@ -33,7 +33,7 @@ class ADObject:
                 value = str(attr['vals'][0])
                 value = [ord(x) for x in value]
             elif t in ('trustdirection', 'trusttype'):
-                print t, type(attr['vals'][0]), str(attr['vals'][0])
+                value = int(attr['vals'][0])
             elif t in ('objectsid', 'ms-ds-creatorsid'):
                 value = str(attr['vals'][0]).encode('hex')
                 init_value = str(attr['vals'][0])
@@ -154,7 +154,7 @@ class Trust(ADObject):
         ad_obj = ADObject(attributes)
         self.targetname = ad_obj.name
         self.objectguid = ad_obj.objectguid
-        self.trusttype= Trust.__trust_attrib.get(ad_obj.trustattributes, 'unknown')
+        self.trusttype= Trust.__trust_attrib.get(ad_obj.trusttype, 'unknown')
         self.trustdirection = Trust.__trust_direction.get(ad_obj.trustdirection, 'unknown')
 
 class GPO(ADObject):
