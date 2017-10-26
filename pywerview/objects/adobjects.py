@@ -33,7 +33,7 @@ class ADObject:
                 value = str(attr['vals'][0])
                 value = [ord(x) for x in value]
             elif t in ('trustdirection', 'trusttype'):
-                print type(attr['vals'][0])
+                print t, type(attr['vals'][0]), str(attr['vals'][0])
             elif t in ('objectsid', 'ms-ds-creatorsid'):
                 value = str(attr['vals'][0]).encode('hex')
                 init_value = str(attr['vals'][0])
